@@ -17,7 +17,18 @@ class Dropdown {
 
   toggleContent() {
     // Toggle the ".dropdown-hidden" class off and on
-    this.content.classList.toggle("dropdown-hidden");
+    // this.content.classList.toggle("dropdown-hidden");
+    if (this.content.classList.contains("dropdown-hidden")) {
+      $(this.content).slideDown("fast", () => {
+        this.content.style.display = "flex";
+        this.content.classList.remove("dropdown-hidden");
+      });
+    } else {
+      $(this.content).slideUp("fast", () => {
+        this.content.style.display = "none";
+        this.content.classList.add("dropdown-hidden");
+      });
+    }
   }
 }
 
