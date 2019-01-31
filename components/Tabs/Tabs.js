@@ -16,13 +16,17 @@ class TabLink {
     this.element.addEventListener("click", () => this.select());
   }
 
-  select() {
+  deselect() {
     // Get all of the elements with the tabs-link class
     const links = document.querySelectorAll(".tabs-link");
     // Using a loop or the forEach method remove the 'tabs-link-selected' class from all of the links
     Array.from(links).forEach(link =>
       link.classList.remove("tabs-link-selected")
     );
+  }
+
+  select() {
+    this.deselect();
     // Add a class named "tabs-link-selected" to this link
     this.element.classList.add("tabs-link-selected");
     // Call the select method on the item associated with this link
@@ -37,11 +41,15 @@ class TabItem {
     this.element = element;
   }
 
-  select() {
+  deselect() {
     // Select all ".tabs-item" elements from the DOM
     const items = document.querySelectorAll(".tabs-item");
     // Remove the class "tabs-item-selected" from each element
     items.forEach(item => item.classList.remove("tabs-item-selected"));
+  }
+
+  select() {
+    this.deselect();
     // Add a class named "tabs-item-selected" to this element
     this.element.classList.add("tabs-item-selected");
     // console.log("Im doing stuff");
@@ -53,11 +61,11 @@ class Tabs {
     this.links = Array.from(document.querySelectorAll(".tabs-link")).map(
       link => new TabLink(link)
     );
-    console.log(this.links);
+    // console.log(this.links);
     this.currentlySelected = this.links.filter(link =>
       link.element.classList.contains("tabs-link-selected")
-    );
-    console.log(this.currentlySelected);
+    )[0];
+    // console.log(this.currentlySelected);
   }
 }
 
